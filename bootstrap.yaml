@@ -61,12 +61,12 @@ spec:
             valueFiles:
               - $values/bootstrap/values/{{ .name }}/values.yaml
         # Reference to this Git repository for values files
-        - repoURL: https://github.com/quocanuit/mlsecops-charts.git
+        - repoURL: https://github.com/quocanuit/just-test.git
           targetRevision: master
           ref: values
         # Additional configuration/CRDs from apps directory
         {{- if .postInstall }}
-        - repoURL: https://github.com/quocanuit/mlsecops-charts.git
+        - repoURL: https://github.com/quocanuit/just-test.git
           targetRevision: master
           path: apps/{{ .name }}
         {{- end }}
