@@ -15,12 +15,12 @@ spec:
           namespace: vault
           postInstall: false
 
-        - chart: cert-manager
-          name: cert-manager
-          repo: https://charts.jetstack.io
-          revision: v1.14.4
-          namespace: cert-manager
-          postInstall: false
+        # - chart: cert-manager
+        #   name: cert-manager
+        #   repo: https://charts.jetstack.io
+        #   revision: v1.14.4
+        #   namespace: cert-manager
+        #   postInstall: false
 
         - chart: mlflow
           name: mlflow
