@@ -12,6 +12,7 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm upgrade --install argo-cd argo/argo-cd \
     --version 9.0.0 \
     --namespace $NAMESPACE \
+    --create-namespace \
     -f "$ROOT/argocd-values.yaml" \
     --wait \
     --timeout 10m
