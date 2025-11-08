@@ -25,10 +25,22 @@ kubectl wait --for=condition=available --timeout=300s deployment/argo-cd-argocd-
 echo "Getting ArgoCD admin password..."
 ARGOCD_PASSWORD=$(kubectl -n $NAMESPACE get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
 
+
 echo "Logging into ArgoCD..."
-argocd login argo-cd-argocd-server.$NAMESPACE.svc.cluster.local --username admin --password "$ARGOCD_PASSWORD" --insecure
+kubectl port-forward svc/argo-cd-argocd-server -n $NAMESPACE 8080:443 > /dev/null 2>&1 &
+PORT_FORWARD_PID=$!
+for i in {1..30}; do
+  if curl -k https://localhost:8080 > /dev/null 2>&1; then
+    break
+  fi
+  sleep 2
+done
+argocd login localhost:8080 --username admin --password "$ARGOCD_PASSWORD" --insecure
 
 echo "Adding repository to ArgoCD..."
-argocd repo add https://github.com/quocanuit/just-test.git --type git
+argocd repo add https://github.com/quocanuit/just-test.git --type git --insecure
+
+echo "Cleaning up..."
+kill $PORT_FORWARD_PID || true
 
 echo "ArgoCD setup complete!"
