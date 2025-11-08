@@ -17,3 +17,5 @@ helm upgrade --install argo-cd argo/argo-cd \
     --timeout 10m
 
 echo "ArgoCD installed!"
+
+argocd repo add https://github.com/quocanuit/just-test.git --type git

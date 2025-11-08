@@ -13,7 +13,7 @@ spec:
           repo: https://helm.releases.hashicorp.com
           revision: 0.31.0
           namespace: vault
-          postInstall: true
+          postInstall: false
 
         - chart: cert-manager
           name: cert-manager
@@ -27,7 +27,7 @@ spec:
           repo: https://community-charts.github.io/helm-charts
           revision: 1.7.3
           namespace: mlflow
-          postInstall: true
+          postInstall: false
 
         - chart: argo-workflows
           name: argo-workflows
